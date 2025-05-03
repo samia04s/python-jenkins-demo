@@ -4,17 +4,24 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-                git 'https://github.com/samia04s/python-jenkins-demo'
+                git branch: 'main', url: 'https://github.com/samia04s/python-jenkins-demo'
             }
         }
 
-        stage('Install dependencies and run tests') {
+        stage('Set up Python') {
             steps {
                 sh '''
                     python3 -m venv venv
-                    . venv/bin/activate
-                    pip install --upgrade pip
+                    source venv/bin/activate
                     pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh '''
+                    source venv/bin/activate
                     pytest
                 '''
             }
