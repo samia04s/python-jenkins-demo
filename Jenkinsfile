@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-                git 'https://github.com/samia04s/python-jenkins-demo'
+                git branch: 'main',url: 'https://github.com/samia04s/python-jenkins-demo'
             }
         }
 
